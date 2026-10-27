@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gym Admin Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="login">
+    <form class="login-card" id="form">
+      <div class="brand">PRO<b>GYM</b></div>
+      <p class="hint">Admin login</p>
+
+      <div class="field">
+        <label for="u">Username</label>
+        <input id="u" autocomplete="username" required autofocus>
+      </div>
+      <div class="field">
+        <label for="p">Password</label>
+        <input id="p" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn lime" id="go">Login</button>
+      <div class="err-text" id="err"></div>
+
+      <p class="small">
+        Pehli baar? Username <code>admin</code> / password <code>admin123</code> — login ke baad Settings me badal lena.<br>
+        Password bhool gaye? Server computer par chalao: <code>npm run reset-password -- naya123</code>
+      </p>
+    </form>
+  </main>
+
+  <script>
+    if (localStorage.getItem('gym_token')) location.replace('/');
+
+    document.getElementById('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = document.getElementById('err'), btn = document.getElementById('go');
+      err.textContent = ''; btn.disabled = true; btn.textContent = 'Checking...';
+      try {
+        const res = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: u.value,
+          password: p.value
+        })
+          });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error);
+        localStorage.setItem('gym_token', data.token);
+        location.href = '/public/';
+      } catch (ex) {
+        err.textContent = ex.message === 'Failed to fetch' ? 'Server band hai. "npm start" chalao.' : ex.message;
+        btn.disabled = false; btn.textContent = 'Login';
+      }
+    });
+  </script>
+</body>
+</html>

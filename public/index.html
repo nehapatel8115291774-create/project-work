@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Gym Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="vendor/chart.umd.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand" id="brand">PRO<b>GYM</b></div>
+      <nav class="nav" id="nav">
+        <a href="#dashboard"  data-p="dashboard"><span>▦</span>Dashboard</a>
+        <a href="#members"    data-p="members"><span>☻</span>Members</a>
+        <a href="#attendance" data-p="attendance"><span>✓</span>Attendance</a>
+        <a href="#facescan"   data-p="facescan"><span>☺</span>Face Scan</a>
+        <a href="#payments"   data-p="payments"><span>₹</span>Payments</a>
+        <a href="#expenses"   data-p="expenses"><span>↓</span>Expenses</a>
+        <a href="#staff"      data-p="staff"><span>★</span>Staff</a>
+        <a href="#equipment"  data-p="equipment"><span>⚙</span>Equipment</a>
+        <a href="#counter"    data-p="counter"><span>◉</span>Rep Counter</a>
+        <a href="#settings"   data-p="settings"><span>≡</span>Settings</a>
+      </nav>
+      <button class="out" id="logout">Logout</button>
+    </aside>
+
+    <main class="main" id="view"></main>
+  </div>
+
+  <dialog id="modal"></dialog>
+  <div id="toasts"></div>
+  <script src="app.js"></script>
+</body>
+</html>
